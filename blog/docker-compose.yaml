@@ -9,11 +9,14 @@ services:
       - "8000:8000"
     env_file: .env
     environment:
-      DATABASE_URL: postgres://thomas:admin@db:5432/blog
+      DATABASE_URL: postgres://thomas:admin@10.5.0.5:5432/blog
     depends_on:
-      - db
+      - blog-db
+    networks:
+      blog-network: 
+        ipv4_address: 10.5.0.4
 
-  db:
+  blog-db:
     image: postgres:16-alpine
     ports:
       - "5432:5432"
@@ -23,7 +26,19 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      blog-network: 
+        ipv4_address: 10.5.0.5
+
 
 volumes:
   db_data:
     driver: local
+
+networks:
+  blog-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+        - gateway: 10.5.0.1
