@@ -1,2 +1,26 @@
 # Définir cette configuration Compose afin de lancer l'application
 # Make Me Watch en production.
+version: '3.8'
+services:
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+
+  client:
+    build: ./client
+    volumes:
+      - website-vol:/app/build
+  nginx:
+    container_name: tv-shows-catalog-nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - "3001:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - website-vol:/app/build
+
+
+volumes:
+  website-vol:
