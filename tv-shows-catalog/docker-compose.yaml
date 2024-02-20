@@ -6,13 +6,13 @@ services:
     build: ./server
     ports:
       - "3000:3000"
-
   client:
     build: ./client
     volumes:
       - website-vol:/app/build
+    ports:
+      - "3002:3000"
   nginx:
-    container_name: tv-shows-catalog-nginx
     image: nginx:latest
     restart: always
     ports:

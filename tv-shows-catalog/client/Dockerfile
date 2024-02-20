@@ -12,3 +12,5 @@ RUN npm run build
 # CMD ["npm", "run", "build"]
 
 # CMD ["npm", "run", "preview"]
+
+CMD ["node", "build/index.js"]
