@@ -2,25 +2,13 @@
 # Make Me Watch en production.
 version: '3.8'
 services:
-  server:
+  make-me-watch-server:
     build: ./server
-    ports:
-      - "3000:3000"
-  client:
+  make-me-watch-client:
     build: ./client
-    volumes:
-      - website-vol:/app/build
-    ports:
-      - "3002:3000"
-  nginx:
+  make-me-watch-nginx:
     image: nginx:latest
-    restart: always
     ports:
-      - "3001:80"
+      - "3000:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - website-vol:/app/build
-
-
-volumes:
-  website-vol:

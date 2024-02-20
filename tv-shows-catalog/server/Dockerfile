@@ -1,6 +1,7 @@
 # Créer un Dockerfile pour cette application en mode production
-
 FROM node:lts
+
+EXPOSE 3000
 
 WORKDIR /app
 
