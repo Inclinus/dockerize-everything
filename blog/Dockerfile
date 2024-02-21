@@ -25,8 +25,4 @@ RUN cargo install --path . && \
 # 7. Installer la CLI Diesel 
 RUN cargo install diesel_cli --no-default-features --features postgres
 
-# 8. Définir l'application pour exécuter la migration au démarrage
-RUN diesel migration run
-
-# 9. Exécuter l'application
-RUN ./blog
+CMD ["sh", "-c", "sleep 10 && diesel migration run && ./blog"]
