@@ -9,6 +9,7 @@ RUN apt-get update \
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY composer.json composer.json
+COPY composer.lock composer.lock
 COPY public public
 COPY src src
 COPY assets assets
