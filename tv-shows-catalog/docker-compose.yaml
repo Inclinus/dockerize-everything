@@ -12,3 +12,7 @@ services:
       - "3000:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+
+# multi-stage build (client et server)
+# 1st stage : dependences et application
+# 2nd stage : get for production

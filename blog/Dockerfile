@@ -8,6 +8,9 @@ WORKDIR /blog
 # 3. Installer les paquets système nécessaires
 RUN apt-get update && apt-get install -y libpq-dev
 
+# 7. Installer la CLI Diesel
+RUN cargo install diesel_cli --no-default-features --features postgres
+
 # 5. Copier les fichiers de l'application
 COPY migrations migrations
 COPY templates templates
@@ -22,7 +25,6 @@ COPY .env .env
 RUN cargo install --path . && \
     cp /usr/local/cargo/bin/blog ./blog
 
-# 7. Installer la CLI Diesel 
-RUN cargo install diesel_cli --no-default-features --features postgres
 
+# plutot health check sur le service db que le sleep
 CMD ["sh", "-c", "sleep 10 && diesel migration run && ./blog"]

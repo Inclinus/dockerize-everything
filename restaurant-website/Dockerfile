@@ -4,7 +4,8 @@ WORKDIR /var/www/html
 
 RUN apt-get update \
     && apt-get install -y libpng-dev libzip-dev libicu-dev unzip sudo nginx git \
-    && docker-php-ext-install intl zip
+    && docker-php-ext-install intl zip \
+# retirer sudo & autres paquets pas nécessaires
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 

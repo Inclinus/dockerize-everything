@@ -3,20 +3,22 @@
 version: '3.8'
 services:
 
+# Feedback prof
+# Ports in env variables
+  # use .dockerignore and copy . . on all dockerfile
   app:
     build: .
     ports:
       - "8000:8000"
-    env_file: .env
     environment:
       DATABASE_URL: postgres://thomas:admin@db:5432/blog
+      # add other environment variables here
     depends_on:
       - db
+    # selon healthcheck (pg_isready)
 
   db:
     image: postgres:16-alpine
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}

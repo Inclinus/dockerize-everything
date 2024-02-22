@@ -11,7 +11,7 @@ services:
 
   nginx:
     container_name: restaurant-nginx
-    image: nginx:latest
+    image: nginx:latest # plutot utilise une stable sur
     restart: always
     ports:
       - "80:80"
