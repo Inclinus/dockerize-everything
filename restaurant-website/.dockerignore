@@ -1,0 +1,12 @@
+.docker/
+.env
+.env.prod
+.env.test
+.gitignore
+composer.lock
+docker-compose.yaml
+Dockerfile
+importmap.php
+phpunit.xml.dist
+README.md
+symfony.lock

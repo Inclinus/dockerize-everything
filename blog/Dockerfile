@@ -12,14 +12,16 @@ RUN apt-get update && apt-get install -y libpq-dev
 RUN cargo install diesel_cli --no-default-features --features postgres
 
 # 5. Copier les fichiers de l'application
-COPY migrations migrations
-COPY templates templates
-COPY static static
-COPY src src
-COPY Cargo.toml Cargo.toml
-COPY Cargo.lock Cargo.lock
-COPY diesel.toml diesel.toml
-COPY .env .env
+# COPY migrations migrations
+# COPY templates templates
+# COPY static static
+# COPY src src
+# COPY Cargo.toml Cargo.toml
+# COPY Cargo.lock Cargo.lock
+# COPY diesel.toml diesel.toml
+# COPY .env .env
+
+COPY . .
 
 # 6. Compiler l'application
 RUN cargo install --path . && \

@@ -9,14 +9,16 @@ RUN apt-get update \
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-COPY composer.json composer.json
-COPY public public
-COPY src src
-COPY assets assets
-COPY templates templates
-COPY bin bin
-COPY config config
-COPY tests tests
+# COPY composer.json composer.json
+# COPY public public
+# COPY src src
+# COPY assets assets
+# COPY templates templates
+# COPY bin bin
+# COPY config config
+# COPY tests tests
+
+COPY . .
 
 RUN chown -R www-data:www-data .
 
