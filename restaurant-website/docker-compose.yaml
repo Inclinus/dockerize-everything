@@ -21,7 +21,7 @@ services:
     image: nginx:stable
     restart: always
     ports:
-      - "80:80"
+      - "${HOST_PORT}:${CONTAINER_PORT}"
     volumes:
       - web-vol:/var/www/html/public
       - ./.docker/nginx/grilli.com.conf:/etc/nginx/conf.d/default.conf

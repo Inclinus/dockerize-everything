@@ -9,7 +9,7 @@ services:
   make-me-watch-nginx:
     image: nginx:stable
     ports:
-      - "3000:80"
+      - "${HOST_PORT}:${CONTAINER_PORT}"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
 

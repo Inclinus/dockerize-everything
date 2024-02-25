@@ -3,27 +3,22 @@
 version: '3.8'
 services:
 
-# Feedback prof
-# Ports in env variables
-  # use .dockerignore and copy . . on all dockerfile
   app:
     build: .
     ports:
-      - "8000:8000"
+      - "${HOST_PORT}:${CONTAINER_PORT}"
     environment:
       DATABASE_URL: ${DATABASE_URL}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       ROCKET_ADDRESS: ${ROCKET_ADDRESS}
-      # add other environment variables here
     depends_on:
-      db:
+      blog-db:
         condition: service_healthy
-      # selon healthcheck (pg_isready)
 
 
-  db:
+  blog-db:
     image: postgres:16-alpine
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
@@ -36,7 +31,6 @@ services:
         interval: 10s
         timeout: 5s
         retries: 5
-
 
 volumes:
   db_data:
