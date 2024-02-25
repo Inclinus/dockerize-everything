@@ -11,11 +11,17 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgres://thomas:admin@db:5432/blog
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      ROCKET_ADDRESS: ${ROCKET_ADDRESS}
       # add other environment variables here
     depends_on:
-      - db
-    # selon healthcheck (pg_isready)
+      db:
+        condition: service_healthy
+      # selon healthcheck (pg_isready)
+
 
   db:
     image: postgres:16-alpine
@@ -25,6 +31,11 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER}"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
 
 
 volumes:

@@ -7,7 +7,7 @@ services:
   make-me-watch-client:
     build: ./client
   make-me-watch-nginx:
-    image: nginx:latest
+    image: nginx:stable
     ports:
       - "3000:80"
     volumes:
