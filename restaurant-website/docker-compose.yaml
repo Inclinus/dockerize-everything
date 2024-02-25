@@ -6,12 +6,19 @@ services:
     build: .
     volumes:
       - web-vol:/var/www/html/public
+    environment:
+      - KERNEL_CLASS=${KERNEL_CLASS}
+      - APP_SECRET=${APP_SECRET}
+      - SYMFONY_DEPRECATIONS_HELPER=${SYMFONY_DEPRECATIONS_HELPER}
+      - PANTHER_APP_ENV=${PANTHER_APP_ENV}
+      - PANTHER_ERROR_SCREENSHOT_DIR=${PANTHER_ERROR_SCREENSHOT_DIR}
+      - APP_ENV=${APP_ENV}
     env_file:
       - .env.prod
 
   nginx:
     container_name: restaurant-nginx
-    image: nginx:latest # plutot utilise une stable sur
+    image: nginx:stable
     restart: always
     ports:
       - "80:80"
